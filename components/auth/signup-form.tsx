@@ -2,17 +2,17 @@
 
 import { useActionState } from "react";
 
-import {
-  signUpWithPassword,
-  type AuthFormState,
-} from "@/lib/auth/actions";
+import { signUpWithPassword, type AuthFormState } from "@/lib/auth/actions";
 import { Heading, Lead } from "@/components/brand/heading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
 export function SignupForm() {
-  const [state, formAction, pending] = useActionState(signUpWithPassword, null as AuthFormState);
+  const [state, formAction, pending] = useActionState(
+    signUpWithPassword,
+    null as AuthFormState,
+  );
 
   return (
     <div className="rounded-[1.75rem] border border-border/70 bg-card/95 p-8 shadow-sm sm:p-10">
@@ -21,8 +21,8 @@ export function SignupForm() {
           Create your household
         </Heading>
         <Lead className="text-base">
-          We&apos;ll send a confirmation email (Supabase Auth). Use a real inbox you can open on this
-          device while testing.
+          We&apos;ll send a confirmation email (Supabase Auth). Use a real inbox
+          you can open on this device while testing.
         </Lead>
       </div>
       <form className="mt-8 space-y-5" action={formAction}>
@@ -35,10 +35,19 @@ export function SignupForm() {
           <label htmlFor="name" className="text-sm font-medium text-foreground">
             Your name
           </label>
-          <Input id="name" name="name" autoComplete="name" placeholder="Jordan Lee" required />
+          <Input
+            id="name"
+            name="name"
+            autoComplete="name"
+            placeholder="Jordan Lee"
+            required
+          />
         </div>
         <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-medium text-foreground">
+          <label
+            htmlFor="email"
+            className="text-sm font-medium text-foreground"
+          >
             Email
           </label>
           <Input
@@ -51,7 +60,10 @@ export function SignupForm() {
           />
         </div>
         <div className="space-y-2">
-          <label htmlFor="password" className="text-sm font-medium text-foreground">
+          <label
+            htmlFor="password"
+            className="text-sm font-medium text-foreground"
+          >
             Password
           </label>
           <Input
@@ -64,13 +76,21 @@ export function SignupForm() {
             minLength={6}
           />
         </div>
-        <Button type="submit" className="w-full rounded-full shadow-sm" size="lg" disabled={pending}>
+        <Button
+          type="submit"
+          className="w-full rounded-full shadow-sm"
+          size="lg"
+          disabled={pending}
+        >
           {pending ? "Creating account…" : "Continue"}
         </Button>
       </form>
       <p className="mt-8 text-center text-sm text-muted-foreground">
         Already have access?{" "}
-        <Link href="/login" className="font-medium text-foreground underline-offset-4 hover:underline">
+        <Link
+          href="/login"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+        >
           Sign in
         </Link>
       </p>

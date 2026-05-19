@@ -2,10 +2,7 @@
 
 import { useActionState } from "react";
 
-import {
-  signInWithPassword,
-  type AuthFormState,
-} from "@/lib/auth/actions";
+import { signInWithPassword, type AuthFormState } from "@/lib/auth/actions";
 import { Heading, Lead } from "@/components/brand/heading";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,9 +30,15 @@ export function LoginForm({ nextPath, initialErrorParam }: LoginFormProps) {
     ? { error: formatLoginErrorParam(initialErrorParam) }
     : null;
 
-  const [state, formAction, pending] = useActionState(signInWithPassword, initial);
+  const [state, formAction, pending] = useActionState(
+    signInWithPassword,
+    initial,
+  );
 
-  const next = nextPath?.startsWith("/") && !nextPath.startsWith("//") ? nextPath : "/dashboard";
+  const next =
+    nextPath?.startsWith("/") && !nextPath.startsWith("//")
+      ? nextPath
+      : "/dashboard";
 
   return (
     <div className="rounded-[1.75rem] border border-border/70 bg-card/95 p-8 shadow-sm sm:p-10">
@@ -44,8 +47,8 @@ export function LoginForm({ nextPath, initialErrorParam }: LoginFormProps) {
           Welcome back
         </Heading>
         <Lead className="text-base">
-          Sign in with the email and password for your household. Sessions use secure cookies via
-          Supabase.
+          Sign in with the email and password for your household. Sessions use
+          secure cookies via Supabase.
         </Lead>
       </div>
       <form className="mt-8 space-y-5" action={formAction}>
@@ -56,7 +59,10 @@ export function LoginForm({ nextPath, initialErrorParam }: LoginFormProps) {
           </p>
         ) : null}
         <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-medium text-foreground">
+          <label
+            htmlFor="email"
+            className="text-sm font-medium text-foreground"
+          >
             Email
           </label>
           <Input
@@ -69,7 +75,10 @@ export function LoginForm({ nextPath, initialErrorParam }: LoginFormProps) {
           />
         </div>
         <div className="space-y-2">
-          <label htmlFor="password" className="text-sm font-medium text-foreground">
+          <label
+            htmlFor="password"
+            className="text-sm font-medium text-foreground"
+          >
             Password
           </label>
           <Input
@@ -82,13 +91,21 @@ export function LoginForm({ nextPath, initialErrorParam }: LoginFormProps) {
             minLength={6}
           />
         </div>
-        <Button type="submit" className="w-full rounded-full shadow-sm" size="lg" disabled={pending}>
+        <Button
+          type="submit"
+          className="w-full rounded-full shadow-sm"
+          size="lg"
+          disabled={pending}
+        >
           {pending ? "Signing in…" : "Sign in"}
         </Button>
       </form>
       <p className="mt-8 text-center text-sm text-muted-foreground">
         New to Streetlight?{" "}
-        <Link href="/signup" className="font-medium text-foreground underline-offset-4 hover:underline">
+        <Link
+          href="/signup"
+          className="font-medium text-foreground underline-offset-4 hover:underline"
+        >
           Create an account
         </Link>
       </p>

@@ -30,11 +30,11 @@ type VerifyEmailFormProps = {
 export function VerifyEmailForm({ initialEmail }: VerifyEmailFormProps) {
   const [confirmState, confirmAction, confirmPending] = useActionState(
     confirmSessionAndContinue,
-    null as AuthFormState
+    null as AuthFormState,
   );
   const [resendState, resendAction, resendPending] = useActionState(
     resendSignupEmail,
-    null as ResendFormState
+    null as ResendFormState,
   );
 
   const masked = useMemo(() => maskEmail(initialEmail), [initialEmail]);
@@ -50,8 +50,9 @@ export function VerifyEmailForm({ initialEmail }: VerifyEmailFormProps) {
         </Heading>
         <Lead className="text-base">
           We sent a confirmation link to{" "}
-          <span className="font-medium text-foreground">{masked}</span>. After you tap the link,
-          Supabase sets a session cookie; then you can continue to onboarding.
+          <span className="font-medium text-foreground">{masked}</span>. After
+          you tap the link, Supabase sets a session cookie; then you can
+          continue to onboarding.
         </Lead>
       </div>
 
@@ -73,11 +74,16 @@ export function VerifyEmailForm({ initialEmail }: VerifyEmailFormProps) {
             placeholder="000000"
           />
           <p className="text-xs text-muted-foreground">
-            If you enable phone or email OTP in Supabase, handle verification here; magic links skip
-            this field.
+            If you enable phone or email OTP in Supabase, handle verification
+            here; magic links skip this field.
           </p>
         </div>
-        <Button type="submit" className="w-full rounded-full shadow-sm" size="lg" disabled={confirmPending}>
+        <Button
+          type="submit"
+          className="w-full rounded-full shadow-sm"
+          size="lg"
+          disabled={confirmPending}
+        >
           {confirmPending ? "Checking…" : "I’ve confirmed my email"}
         </Button>
       </form>
@@ -88,7 +94,9 @@ export function VerifyEmailForm({ initialEmail }: VerifyEmailFormProps) {
           <p className="text-sm text-destructive">{resendState.error}</p>
         ) : null}
         {resendState?.success ? (
-          <p className="text-sm text-muted-foreground">Another confirmation email is on its way.</p>
+          <p className="text-sm text-muted-foreground">
+            Another confirmation email is on its way.
+          </p>
         ) : null}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <Button
@@ -99,7 +107,11 @@ export function VerifyEmailForm({ initialEmail }: VerifyEmailFormProps) {
           >
             {resendPending ? "Sending…" : "Resend link"}
           </Button>
-          <Button variant="ghost" className="rounded-full text-muted-foreground" asChild>
+          <Button
+            variant="ghost"
+            className="rounded-full text-muted-foreground"
+            asChild
+          >
             <Link href="/signup">Use a different email</Link>
           </Button>
         </div>

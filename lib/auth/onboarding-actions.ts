@@ -12,9 +12,14 @@ export async function completeOnboarding(
 ): Promise<OnboardingFormState> {
   const householdName = String(formData.get("household_name") ?? "").trim();
   const neighborhood = String(formData.get("neighborhood") ?? "").trim();
+  const childFirstName = String(formData.get("child_first_name") ?? "").trim();
+  const childAgeRange = String(formData.get("child_age_range") ?? "").trim();
 
   if (!householdName || !neighborhood) {
     return { error: "Please complete household name and neighborhood." };
+  }
+  if (!childFirstName || !childAgeRange) {
+    return { error: "Please add your child's first name and age range." };
   }
 
   const supabase = await createSupabaseServerClient();
@@ -61,6 +66,17 @@ export async function completeOnboarding(
     return {
       error: memberError.message,
     };
+  }
+
+  const { error: childError } = await supabase.from("children").insert({
+    household_id: household.id,
+    first_name: childFirstName,
+    age_range: childAgeRange,
+    interests: [],
+  });
+
+  if (childError) {
+    return { error: childError.message };
   }
 
   redirect("/dashboard");

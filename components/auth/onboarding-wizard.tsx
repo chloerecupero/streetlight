@@ -76,6 +76,8 @@ export function OnboardingWizard() {
       </div>
       <form className="mt-8 space-y-6" action={formAction}>
         <input type="hidden" name="household_name" value={householdName} readOnly />
+        <input type="hidden" name="child_first_name" value={childFirstName} readOnly />
+        <input type="hidden" name="child_age_range" value={ageRange} readOnly />
         {state?.error ? (
           <p className="rounded-2xl border border-destructive/25 bg-destructive/10 px-4 py-3 text-sm text-destructive">
             {state.error}
